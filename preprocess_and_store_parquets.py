@@ -21,6 +21,10 @@ import os
 import spacy
 import re
 
+
+### THIS IS TO PREPROCESS AND STORE THE DATA INTO PARQUET FILES - "MONTH-YEAR" WISE
+
+
 DATA_PATH = 'media/'
 if not os.path.exists(DATA_PATH):
     os.makedirs(DATA_PATH)
@@ -101,9 +105,8 @@ sr_data_query = """
 
 date1 = "2015-12-01"  # input start date
 date2 = datetime.datetime.now().strftime("%Y-%m-%d")  # input end date
-
+# i need the month-years from date1 to date2 , then will use the month-year in the above sql query:
 done_list = [{'key': i.strftime("%m-%Y")} for i in pd.date_range(start=date1, end=date2, freq='M')]
-
 
 def normalize_text(text):
     """    :param text: string    :return:    clean string    """
